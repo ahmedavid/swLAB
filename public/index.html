@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>SW LAB</h1>
+
+<button id="myButton" style="border: 1px solid red">CACHE MP3</button>
+
+
+<script>
+    if (!('serviceWorker' in navigator)) {
+        console.log('Service worker not supported');
+    }
+    navigator.serviceWorker.register('service-worker.js')
+        .then(function() {
+            console.log('Registered');
+        })
+        .catch(function(error) {
+            console.log('Registration failed:', error);
+        });
+
+    var myButton = document.getElementById("myButton")
+
+    myButton.addEventListener('click',function (event) {
+        //console.log("Button Clicked",event)
+        var url = 'https://radio-download.dw.com/Events/dwelle/deutschkurse/deutschwarumnicht/serie1/eng/DWN_Englisch_Serie1_Lektion01_dwdownload.mp3'
+        fetch(url)
+            .then(function (response) {
+            console.log("DONE:",response)
+        })
+            .catch(function (err) {
+            console.error(err)
+        })
+    })
+
+
+</script>
+</body>
+</html>
